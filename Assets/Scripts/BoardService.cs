@@ -40,7 +40,7 @@ public class BoardService : MonoBehaviour
     {
         InitializeBoard();
         VerifyBoardOnMatches();
-        _cellFactory.InstantiateBoard(this, _cellMover);
+        _cellFactory.InstantiateBoard(this, _cellMover, _planeBooster);
     }
 
     private void Update()
@@ -227,7 +227,7 @@ public class BoardService : MonoBehaviour
         }
 
         var planeCellData = new CellData(CellData.CellType.Plane, point);
-        cell.Initialize(planeCellData, _cellSprites[_cellSprites.Length - 1], _cellMover);
+        cell.Initialize(planeCellData, _cellSprites[_cellSprites.Length - 1], _cellMover, _planeBooster);
         cell.rect.anchoredPosition = GetBoardPositionFromPoint(point);
 
         var cellAtPoint = GetCellAtPoint(point);
@@ -288,7 +288,7 @@ public class BoardService : MonoBehaviour
                             cell = _cellFactory.InstantiateCell();
                         }
 
-                        cell.Initialize(new CellData(cellType, point), _cellSprites[(int)(cellType - 1)], _cellMover);
+                        cell.Initialize(new CellData(cellType, point), _cellSprites[(int)(cellType - 1)], _cellMover,_planeBooster);
                         cell.rect.anchoredPosition = GetBoardPositionFromPoint(fallPoint);
 
                         var holeCell = GetCellAtPoint(point);

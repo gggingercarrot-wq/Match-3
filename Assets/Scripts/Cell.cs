@@ -16,6 +16,7 @@ public class Cell : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     [SerializeField] private float _moveSpeed = 10f;
     private Vector2 _position;
     private bool _isUpdating;
+    private PlaneBooster _planeBooster;
 
     public bool UpdateCell()
     {
@@ -41,11 +42,12 @@ public class Cell : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     public Point Point => _cellData.point;
     public CellData.CellType CellType => _cellData.cellType;
 
-    public void Initialize(CellData cellData, Sprite sprite, CellMover cellMover)
+    public void Initialize(CellData cellData, Sprite sprite, CellMover cellMover, PlaneBooster planeBooster)
     {
         _cellData = cellData;
         _image.sprite = sprite;
         _cellMover = cellMover;
+        _planeBooster = planeBooster;
 
     }
     private void UpdateName()
@@ -58,6 +60,12 @@ public class Cell : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     public void OnPointerUp(PointerEventData eventData)
     {
+
+        if (_cellData.cellType == CellData.CellType.Plane)
+        {
+            _planeBooster.ActivatePlane(_cellData.point, _cellData.cellType);
+            return;
+        }
         _cellMover.DropCell();
     }
 

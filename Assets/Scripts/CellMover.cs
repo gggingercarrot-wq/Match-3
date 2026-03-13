@@ -75,7 +75,7 @@ public class CellMover
                 CellData.CellType swappedType = _boardService.GetCellTypeAtPoint(_newPoint);
                 // передаем второй параметр
                 _boardService.ActivatePlane(_movingCell.Point, swappedType);
-                _boardService.ResetCell(_movingCell);
+                //_boardService.ResetCell(_movingCell);
             }
             else if (_boardService.GetCellTypeAtPoint(_newPoint) == CellData.CellType.Plane)
             {
@@ -83,9 +83,9 @@ public class CellMover
                 CellData.CellType swappedType = _movingCell.CellType;
                 // передаем второй параметр
                 _boardService.ActivatePlane(_newPoint, swappedType);
-                _boardService.ResetCell(_movingCell);
+               // _boardService.ResetCell(_movingCell);
             }
-            else
+            else    
             {
                 _boardService.FlipCells(_movingCell.Point, _newPoint, true);
             }

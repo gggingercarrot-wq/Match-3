@@ -30,11 +30,14 @@ public class PlaneBooster
     // Активирует специальный элемент самолетик, который
     public void ActivatePlane(Point planePoint, CellData.CellType swappedCellType)
     {
+
         var cellAtPoint = _boardService.GetCellAtPoint(planePoint);
         if (cellAtPoint == null) return;
 
         var planeCell = cellAtPoint.GetCell();
         if (planeCell == null) return;
+
+
 
         // ШАГ 1: Локальный взрыв (самолетик + 4 соседа)
         List<Point> localExplosionPoints = GetLocalExplosionPoints(planePoint);

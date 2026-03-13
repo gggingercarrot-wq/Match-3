@@ -19,7 +19,7 @@ public class CellFactory: MonoBehaviour
     [SerializeField] private KilledCell _killedCellPrefab;
 
 
-    public void InstantiateBoard(BoardService boardService, CellMover cellMover)
+    public void InstantiateBoard(BoardService boardService, CellMover cellMover, PlaneBooster planeBooster)
     {
         _boardService = boardService;
         for (int y = 0; y < Config.BoardHeight; y++)
@@ -34,7 +34,7 @@ public class CellFactory: MonoBehaviour
 
                 var cell = InstantiateCell();
                 cell.rect.anchoredPosition = BoardService.GetBoardPositionFromPoint(point);
-                cell.Initialize( new CellData(cellType, new Point(x,y)), boardService.CellSprites[(int)(cellType - 1)], cellMover );
+                cell.Initialize( new CellData(cellType, new Point(x,y)), boardService.CellSprites[(int)(cellType - 1)], cellMover, planeBooster);
                 cellData.SetCell(cell);
             }
         }
